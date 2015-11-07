@@ -1,5 +1,5 @@
 """
-module name: search
+module name: search1
 descriptions: This will use to main module to search the word and word's synonyms from text files.
 update : working for single file with single word
 """
