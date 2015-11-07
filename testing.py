@@ -1,3 +1,4 @@
 from functions import *
 
-print file2string("test.txt")
+list = ["vishal", "kings", "mans"]
+print string2stem(list)
