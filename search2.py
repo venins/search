@@ -83,7 +83,7 @@ for word in words:
 					local_index.append(j)
 					total_index.append(j)
 		if i == 0:
-			print "Search for the word " + word + "...\n"
+			print "Search for the word " + word + "========>\n"
 			if len(local_index)>0:
 				print str(len(local_index)) + " results found.\n"
 				for ii in range(len(local_index)):
@@ -94,4 +94,4 @@ for word in words:
 				print str(len(local_index)) + " results found replacing " + "\"" + word_synonyms[0] + " with synonym " + word_synonyms[i] + "\"."
 				for ii in range(len(local_index)):
 					print "Result #", str(ii+1), " - ", "\"", file_content_list[local_index[ii]], ".\"\n",
-				k = []
+				local_index = []
