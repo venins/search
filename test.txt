@@ -1,1 +1,8 @@
-hi my name is vishal singh. i am writing this test file . i am doing this for fun.
+In the olden days, it was common practice in medieval England for kings to develop and maintain an army of
+knights who would fight for the king to death. The knights were selected from a group of supremely talented
+fighters known for their swordsmanship and marksmanship. The king or chieftian would then spend a lot of
+his finances to maintain this army of knights who would die to defend his honour.
+ 
+It was a common practice to also have sporting fights where two knights would face each other holding very
+long, unwieldy spears while covered from head to toe in metallic armour. This practice, which often resulted
+in fatal accidents was called "jousting".
