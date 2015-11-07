@@ -16,6 +16,7 @@ from nltk.stem.porter import *
 
 #looking for word in sentence
 def findword(word, string):
+	"""find the whole word in the sentence using the regular experession"""
 	data = re.compile(r'\b({0})\b'.format(word), flags=re.IGNORECASE).search(string)
 	if data == None:
 		return False
@@ -25,11 +26,13 @@ def findword(word, string):
 
 #function to take filename and return string
 def file2string(file_name):
+	"""take the file name and return its content in the string"""
 	file_content = open(file_name, 'r').read()
 	return file_content
 
 #function to find all common synonyms words
 def word2synonyms(word):
+	"""generate all synonyms of perticular word"""
 	synonyms_words = []
 	synonyms_words.append(word)
 	for i,j in enumerate(wn.synsets(word)):
@@ -41,11 +44,21 @@ def word2synonyms(word):
 
 #function will take list of strings and stemm the all strigns inside the list
 def string2stem(stringlist):
+	"""convert the whole list items into stemm value and
+	return the list of stemm"""
 	stemmer = PorterStemmer()
 	stemmstring = [stemmer.stem(string) for string in stringlist]
 	return stemmstring
 
 #function to take single word and return stem of word
 def string2stem_word(word):
+	"""take a single word and creturn stemm of word"""
 	stemmer = PorterStemmer()
 	return stemm.stem(word)
+
+def file2list(file_name):
+	"""convert the text file content into period
+	seperated list."""
+	file_content = file2string(file_name)
+	file_content_list = file_content.split(".")
+	return file_content_list
