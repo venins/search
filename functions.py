@@ -6,6 +6,7 @@ This module content some of commmon functions
 -> file2string: This will take the file_name and return the file content as a string
 -> word2synonyms: this will take word and return list with all synonyms of that word
 -> string2stem: this will take the list of the stirngs and return stem list of strings
+-> string2stem_word: stemmer for single word
 """
 
 import re
@@ -43,3 +44,8 @@ def string2stem(stringlist):
 	stemmer = PorterStemmer()
 	stemmstring = [stemmer.stem(string) for string in stringlist]
 	return stemmstring
+
+#function to take single word and return stem of word
+def string2stem_word(word):
+	stemmer = PorterStemmer()
+	return stemm.stem(word)
