@@ -69,6 +69,7 @@ def file2list(file_name):
 	"""convert the text file content into period
 	seperated list."""
 	file_content = file2string(file_name)
+	#creating the list with sentences seperated by the dot
 	file_content_list = file_content.split(".")
 	return file_content_list
 
@@ -135,10 +136,11 @@ def wordwithsynonyms(file_name, words):
 files_in_dir = []
 def all_files_in_dir(dir_name):
 	"""Explore directory for all files and folders
-	and return list of all text files.
+	and return list of all text files using recursive function.
 	"""
 	current_dir_files = os.listdir(dir_name)
 	for dir_files in current_dir_files:
+		#this will create full path file or folder name
 		current_file_name = dir_name + "/" + dir_files
 		if os.path.isfile(current_file_name) and current_file_name.endswith(".txt"):
 			if current_file_name not in files_in_dir:
@@ -146,3 +148,37 @@ def all_files_in_dir(dir_name):
 		elif os.path.isdir(current_file_name):
 			all_files_in_dir(current_file_name)
 	return files_in_dir
+
+
+def cmd_argv():
+	"""accepting arguments from cmd"""
+	try:
+		if sys.argv[1] == "-f" or sys.argv[1] == "-d":
+			option = sys.argv[1]
+		else:
+			print "Please select \"-f\" for single text file or \"-d\" for Full directory search"
+	except:
+		print "Please select \"-f\" for single text file or \"-d\" for Full directory search"
+		sys.exit()
+
+	try:
+		if sys.argv[2].endswith(".txt") and option == "-f":
+			file_name = sys.argv[2]
+		elif option =="-d":
+			dir_name = sys.argv[2]
+		else:
+			print "please enter text file name or directory name with proper option"
+	except:
+		print "Please enter .txt file name"
+		sys.exit()
+
+	try:
+		if len(sys.argv) > 3:
+			for args in sys.argv[3:]:
+				if args not in words:
+					words.append(args)
+		else:
+			print "Please enter one or more words to search"
+	except:
+		print "Please enter one or more words to search"
+		sys.exit()
