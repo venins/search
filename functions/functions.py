@@ -7,6 +7,10 @@ This module content some of commmon functions
 -> word2synonyms: this will take word and return list with all synonyms of that word
 -> string2stem: this will take the list of the stirngs and return stem list of strings
 -> string2stem_word: stemmer for single word
+-> file2list: convert file into "." seperated sentences.
+->wordwithsynonyms: the actule function which take filename and words and search the file
+                    with words and its synonyms.
+->all_files_in_dir: function to explore and add all file path in list.
 """
 import os
 import sys
@@ -27,9 +31,11 @@ def findword(word, string):
 
 #function to take filename and return string
 def file2string(file_name):
-	"""take the file name and return its content in the string"""
-	file_content = open(file_name, 'r').read()
-	return file_content
+	"""take the file name and return its content in the string.
+	removing all special character ',' """
+	file_content_old = open(file_name, 'r').read()
+	file_content_new = file_content_old.replace(",", "")
+	return file_content_new
 
 #function to find all common synonyms words
 def word2synonyms(word):
