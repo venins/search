@@ -8,7 +8,7 @@ def main():
 	file_name = None
 	dir_name = None
 
-	#accepting arguments from the cmd
+	"""accepting arguments from cmd"""
 	try:
 		if sys.argv[1] == "-f" or sys.argv[1] == "-d":
 			option = sys.argv[1]
