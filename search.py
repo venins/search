@@ -1,4 +1,5 @@
 import sys
+import os
 
 from functions.functions import *
 
@@ -41,13 +42,19 @@ def main():
 		sys.exit()
 
 	if option == "-f":
-		wordwithsynonyms(file_name, words)
+		if os.path.isfile(file_name):
+			wordwithsynonyms(file_name, words)
+		else:
+			print "File " + file_name + " Not found."
 	elif option == "-d":
-		files_in_dir = []
-		files_in_dir = all_files_in_dir(dir_name)
-		for files in files_in_dir:
-			print "Searching in file " + files + "\n"
-			wordwithsynonyms(files, words)
+		if os.path.isdir(dir_name):
+			files_in_dir = []
+			files_in_dir = all_files_in_dir(dir_name)
+			for files in files_in_dir:
+				print "Searching in file " + files + "\n"
+				wordwithsynonyms(files, words)
+		else:
+			print "directory " + dir_name + " not Found."
 
 
 if __name__ == "__main__":
