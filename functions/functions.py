@@ -8,7 +8,8 @@ This module content some of commmon functions
 -> string2stem: this will take the list of the stirngs and return stem list of strings
 -> string2stem_word: stemmer for single word
 """
-
+import os
+import sys
 import re
 
 from nltk.corpus import wordnet as wn
@@ -62,3 +63,78 @@ def file2list(file_name):
 	file_content = file2string(file_name)
 	file_content_list = file_content.split(".")
 	return file_content_list
+
+#real search funtion
+
+def wordwithsynonyms(file_name, words):
+	"""
+	converting the users files contents into the
+	list of sentences.
+	"""
+	file_content_list = None
+	if file_name:
+		file_content_list = file2list(file_name)
+
+	"""
+	using the list of sententces and storing its stemm form 
+	using the string2stem function into new directory
+	"""
+	file_content_stemm_dict = {}
+	for i in range(len(file_content_list)):
+		file_content_stemm_dict[i] = string2stem([line.decode('utf-8').strip() for line in file_content_list[i].split()])
+
+	"""
+	creating loop for all user provided search words,
+	it will iterate over one by one all words and 
+	search for all possible words.
+	"""
+
+	for word in words:
+		#Generating list of all synonyms of the word
+		word_synonyms = word2synonyms(word)
+		#converting all word synonyms in list formate
+		word_synonyms_stemm = string2stem(word_synonyms)
+		"""
+		creating two list to store the found sententces index.
+		one is to store unique index other to check number total
+		for that perticular loop
+		"""
+		total_index = []
+		local_index = []
+
+		for i in range(len(word_synonyms_stemm)):
+			for j in range(len(file_content_list)):
+				if word_synonyms_stemm[i] in file_content_stemm_dict[j]:
+					if j not in total_index:
+						local_index.append(j)
+						total_index.append(j)
+			if i == 0:
+				print "Search for the word " + word + "========>\n"
+				if len(local_index)>0:
+					print str(len(local_index)) + " results found.\n"
+					for ii in range(len(local_index)):
+						print "Result #", str(ii+1), " - ",  "\"", file_content_list[local_index[ii]], ".\"\n"
+				local_index = []
+			else:
+				if len(local_index)>0:
+					print str(len(local_index)) + " results found replacing " + "\"" + word_synonyms[0] + " with synonym " + word_synonyms[i] + "\"."
+					for ii in range(len(local_index)):
+						print "Result #", str(ii+1), " - ", "\"", file_content_list[local_index[ii]], ".\"\n",
+					local_index = []
+
+
+#dir explore function
+files_in_dir = []
+def all_files_in_dir(dir_name):
+	"""Explore directory for all files and folders
+	and return list of all text files.
+	"""
+	current_dir_files = os.listdir(dir_name)
+	for dir_files in current_dir_files:
+		current_file_name = dir_name + "/" + dir_files
+		if os.path.isfile(current_file_name) and current_file_name.endswith(".txt"):
+			if current_file_name not in files_in_dir:
+				files_in_dir.append(current_file_name)
+		elif os.path.isdir(current_file_name):
+			all_files_in_dir(current_file_name)
+	return files_in_dir
