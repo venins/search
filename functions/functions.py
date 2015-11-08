@@ -31,18 +31,19 @@ def findword(word, string):
 
 #function to take filename and return string
 def file2string(file_name):
-	"""take the file name and return its content in the string.
-	removing all special character ',' """
+	"""take the file name and return its content in the string."""
 	file_content_old = open(file_name, 'r').read()
+	#removed the special character "," as it join with the word and treated as diffrent word
 	file_content_new = file_content_old.replace(",", "")
 	return file_content_new
 
 #function to find all common synonyms words
 def word2synonyms(word):
-	"""generate all synonyms of perticular word"""
+	"""generate all synonyms of perticular word using nltk wordnet"""
 	synonyms_words = []
 	synonyms_words.append(word)
 	for i,j in enumerate(wn.synsets(word)):
+		#adding all layers of lemma_names in list
 		name_list = j.lemma_names()
 		for name in name_list:
 			if name not in synonyms_words:
@@ -54,6 +55,7 @@ def string2stem(stringlist):
 	"""convert the whole list items into stemm value and
 	return the list of stemm"""
 	stemmer = PorterStemmer()
+	#creating stemm of words using list comprehension
 	stemmstring = [stemmer.stem(string) for string in stringlist]
 	return stemmstring
 
