@@ -5,7 +5,7 @@ description: this module will support multiples words at once
 
 import sys
 
-from functions import *
+from functions.functions import *
 
 words = []
 option = None

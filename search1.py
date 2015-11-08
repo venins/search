@@ -5,7 +5,7 @@ update : working for single file with single word
 """
 import sys
 
-from functions import *
+from functions.functions import *
 
 script_name, option, file_name, word = sys.argv
 
